@@ -1,0 +1,42 @@
+1.mysql> SELECT Count(category.category_id) FROM category, film_category, film WHERE category.name = "Documentary" AND category.category_id = film_category.category_id AND film_category.film_id = film.film_id AND film.special_features LIKE "%Deleted Scenes%";
++-----------------------------+
+| Count(category.category_id) |
++-----------------------------+
+|                          34 |
++-----------------------------+
+1 row in set (0.00 sec)
+
+2.mysql> SELECT staff_list.name, COUNT(staff_list.name) FROM category, film_category, inventory, rental, staff_list Where staff_list.name = "Jon Stephens"  AND staff_list.ID = rental.staff_id AND category.name = "Sci-Fi" AND category.category_id = film_category.category_id AND film_category.film_id = inventory.film_id AND inventory.inventory_id = rental.inventory_id;
++--------------+------------------------+
+| name         | COUNT(staff_list.name) |
++--------------+------------------------+
+| Jon Stephens |                    548 |
++--------------+------------------------+
+1 row in set (0.00 sec)
+
+3.mysql> SELECT category, total_sales From sales_by_film_category Where category = "Animation";
++-----------+-------------+
+| category  | total_sales |
++-----------+-------------+
+| Animation |     4656.30 |
++-----------+-------------+
+1 row in set (0.10 sec)
+
+4.mysql> SELECT category.name, count(category.name) FROM category, film_category, inventory, rental, customer_list WHERE customer_list.name = "PATRICIA JOHNSON" AND customer_list.ID = rental.customer_id AND rental.inventory_id = inventory.inventory_id AND inventory.film_id = film_category.film_id AND film_category.category_id = category.category_id Group BY category.name ORDER BY COUNT(category.name) DESC limit 3;
++-----------+----------------------+
+| name      | count(category.name) |
++-----------+----------------------+
+| Sports    |                    5 |
+| Classics  |                    4 |
+| Animation |                    3 |
++-----------+----------------------+
+3 rows in set (0.00 sec)
+
+5.mysql> SELECT COUNT(film.rating) FROM film, inventory, rental, customer_list WHERE film.rating = "R" AND film.film_id = inventory.film_id AND inventory.inventory_id = rental.inventory_id AND rental.customer_id = customer_list.ID AND customer_list.name = "SUSAN WILSON";
++--------------------+
+| COUNT(film.rating) |
++--------------------+
+|                  3 |
++--------------------+
+1 row in set (0.01 sec)
+
