@@ -1,0 +1,105 @@
+1.mysql> Select film.title From category, film_category, film Where category.name = "Comedy" AND category.category_id = film_category.category_id AND film_category.film_id = film.film_id AND film.rating = "PG-13";
++-------------------------+
+| title                   |
++-------------------------+
+| AIRPLANE SIERRA         |
+| ANTHEM LUKE             |
+| FLINTSTONES HAPPINESS   |
+| FREEDOM CLEOPATRA       |
+| GROUNDHOG UNCUT         |
+| KNOCK WARLOCK           |
+| PARADISE SABRINA        |
+| PERFECT GROOVE          |
+| RUSHMORE MERMAID        |
+| SADDLE ANTITRUST        |
+| STRICTLY SCARFACE       |
+| TRAINSPOTTING STRANGERS |
++-------------------------+
+12 rows in set (0.00 sec)
+
+2.mysql> SELECT title, Count(title) FROM film, film_category,inventory, rental WHERE film.film_id = film_category.film_id AND film.film_id = inventory.film_id AND inventory.film_id = film_category.film_id AND rental.inventory_id = inventory.inventory_id And film_category.category_id = 11 GROUP BY film.title ORDER BY Count(title) DESC LIMIT 3;
++--------------+--------------+
+| title        | Count(title) |
++--------------+--------------+
+| PULP BEVERLY |           30 |
+| FAMILY SWEET |           29 |
+| SWARM GOLD   |           27 |
++--------------+--------------+
+3 rows in set (0.00 sec)
+
+3.mysql> SELECT DISTINCT customer_list.name FROM customer_list, film_category, inventory, rental, category WHERE inventory.film_id = film_category.film_id AND rental.inventory_id = inventory.inventory_id And film_category.category_id = category.category_id AND category.name = "Sports" AND customer_list.country = "India" AND rental.customer_id = customer_list.ID;
++-------------------+
+| name              |
++-------------------+
+| ADAM GOOCH        |
+| SHERRI RHODES     |
+| ANNETTE OLSON     |
+| ARLENE HARVEY     |
+| CHRISTIAN JUNG    |
+| LUCY WHEELER      |
+| CARLOS COUGHLIN   |
+| TONYA CHAPMAN     |
+| HELEN HARRIS      |
+| TIM CARY          |
+| SALLY PIERCE      |
+| BERNARD COLBY     |
+| JOSEPHINE GOMEZ   |
+| LAURIE LAWRENCE   |
+| EDITH MCDONALD    |
+| WAYNE TRUONG      |
+| HOLLY FOX         |
+| LENA JENSEN       |
+| ALLEN BUTTERFIELD |
+| ANITA MORALES     |
+| MILDRED BAILEY    |
+| AMY LOPEZ         |
+| PEARL GARZA       |
+| NAOMI JENNINGS    |
+| CHAD CARBONE      |
+| PENNY NEAL        |
+| STEVEN CURLEY     |
+| CYNTHIA YOUNG     |
+| CHERYL MURPHY     |
+| NINA SOTO         |
+| JOHN FARNSWORTH   |
+| PAULA BRYANT      |
+| RAMONA HALE       |
+| LEE HAWKS         |
+| JUANITA MASON     |
+| BRADLEY MOTLEY    |
+| LORI WOOD         |
+| DWAYNE OLVERA     |
+| JOSHUA MARK       |
+| SAMUEL MARLOW     |
+| GERALD FULTZ      |
+| NICOLE PETERSON   |
+| BRETT CORNWELL    |
+| BEATRICE ARNOLD   |
+| THEODORE CULP     |
+| GEORGIA JACOBS    |
+| MIKE WAY          |
+| SHANNON FREEMAN   |
+| MILTON HOWLAND    |
+| NANCY THOMAS      |
++-------------------+
+50 rows in set (0.01 sec)
+
+4.mysql> SELECT DISTINCT customer_list.name FROM customer_list, rental, inventory, film_actor, actor Where actor.first_name = "NICK" AND actor.last_name = "WAHLBERG" AND actor.actor_id = film_actor.actor_id AND film_actor.film_id = inventory.film_id AND inventory.inventory_id = rental.inventory_id AND rental.customer_id = customer_list.ID AND customer_list.country = "Canada";
++-------------------+
+| name              |
++-------------------+
+| LORETTA CARPENTER |
+| DARRELL POWER     |
++-------------------+
+2 rows in set (0.00 sec)
+
+
+5.mysql> SELECT DISTINCT COUNT(actor.actor_id) FROM film_actor, actor Where actor.first_name = "SEAN" AND actor.last_name = "WILLIAMS" AND actor.actor_id = film_actor.actor_id;
++-----------------------+
+| COUNT(actor.actor_id) |
++-----------------------+
+|                    26 |
++-----------------------+
+1 row in set (0.00 sec)
+ 
+
